@@ -112,19 +112,19 @@ public abstract class Enemy extends Character {
 		double pos_x = _x + x;
         double pos_y = _y - Game.TILES_SIZE + y;
         
-			Entity a = _board.getEntity((pos_x+1)/Game.TILES_SIZE, (pos_y+1)/Game.TILES_SIZE, this);//góc trên trái
+			Entity a = _board.getEntity((pos_x)/Game.TILES_SIZE, (pos_y)/Game.TILES_SIZE, this);//góc trên trái
 			if(a.collide(this))
 				return false;
             
-            a = _board.getEntity((pos_x+14)/Game.TILES_SIZE, (pos_y+1)/Game.TILES_SIZE, this);//góc trên ph?i
+            a = _board.getEntity((pos_x+15)/Game.TILES_SIZE, (pos_y)/Game.TILES_SIZE, this);//góc trên ph?i
 			if(a.collide(this))
 				return false;
             
-            a = _board.getEntity((pos_x+1)/Game.TILES_SIZE, (pos_y+14)/Game.TILES_SIZE, this);//góc d??i trái
+            a = _board.getEntity((pos_x)/Game.TILES_SIZE, (pos_y+15)/Game.TILES_SIZE, this);//góc d??i trái
 			if(a.collide(this))
 				return false;
             
-            a = _board.getEntity((pos_x+14)/Game.TILES_SIZE, (pos_y+14)/Game.TILES_SIZE, this);//góc d??i ph?i
+            a = _board.getEntity((pos_x+15)/Game.TILES_SIZE, (pos_y+15)/Game.TILES_SIZE, this);//góc d??i ph?i
 			if(a.collide(this))
 				return false;
             
