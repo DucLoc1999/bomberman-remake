@@ -2,11 +2,17 @@ package uet.oop.bomberman.level;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
-import uet.oop.bomberman.entities.character.enemy.Balloon;
+import uet.oop.bomberman.entities.character.enemy.Balloom;
+import uet.oop.bomberman.entities.character.enemy.Doll;
+import uet.oop.bomberman.entities.character.enemy.Kondoria;
+import uet.oop.bomberman.entities.character.enemy.Minvo;
 import uet.oop.bomberman.entities.character.enemy.Oneal;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.Portal;
@@ -34,12 +40,13 @@ public class FileLevelLoader extends LevelLoader {
 	@Override
 	public void loadLevel(int level) {
         System.out.println("uet.oop.bomberman.level.FileLevelLoader");
-        String path = "./res/levels/Level"+level+".txt";
+        String path = "/levels/Level"+(level+4)+".txt";
         try{
-            FileReader fr = new FileReader(path);
-            BufferedReader reader = new BufferedReader(fr);
+            URL absPath = FileLevelLoader.class.getResource(path);
+            InputStream is = absPath.openStream();
+            //FileReader fr = new FileReader(path);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             
-            reader.readLine();
             String line = reader.readLine();
             String[] s = line.split(" ");
         System.out.println(line);
@@ -56,7 +63,8 @@ public class FileLevelLoader extends LevelLoader {
                 }
                 System.out.println("");
             }
-            fr.close();
+            reader.close();
+            is.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -80,13 +88,25 @@ public class FileLevelLoader extends LevelLoader {
                     _board.addEntity(xBomber + yBomber * _width, new Grass(xBomber, yBomber, Sprite.grass));
                     break;
                 // thêm Enemy
-                case '1'://Balloon
+                case '1'://Balloom
                     _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
-                    _board.addCharacter( new Balloon(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+                    _board.addCharacter( new Balloom(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
                     break;
                 case '2'://Oneal
                     _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
                     _board.addCharacter( new Oneal(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+                    break;
+                case '3'://Doll
+                    _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
+                    _board.addCharacter( new Doll(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+                    break;
+                case '4'://Minvo
+                    _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
+                    _board.addCharacter( new Minvo(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+                    break;
+                case '5'://Kondoria
+                    _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
+                    _board.addCharacter( new Kondoria(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
                     break;
            		// thêm Brick
                 case '*':

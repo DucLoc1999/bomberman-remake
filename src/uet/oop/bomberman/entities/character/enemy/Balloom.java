@@ -5,11 +5,11 @@ import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.character.enemy.ai.AILow;
 import uet.oop.bomberman.graphics.Sprite;
 
-public class Balloon extends Enemy {
+public class Balloom extends Enemy {
 	
 	
-	public Balloon(int x, int y, Board board) {
-		super(x, y, board, Sprite.balloom_dead, Game.getBomberSpeed() / 2, 100);
+	public Balloom(int x, int y, Board board) {
+		super(x, y, board, Sprite.balloom_dead, Game.getBomberSpeed() / 2, 300);
 		
 		_sprite = Sprite.balloom_left1;
 		
