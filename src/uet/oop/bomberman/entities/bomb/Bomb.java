@@ -1,9 +1,11 @@
 package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.Board;
+import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.AnimatedEntitiy;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
+import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -72,15 +74,21 @@ public class Bomb extends AnimatedEntitiy {
     /**
      * Xu ly bom no
      */
-	protected void explode() {
+		protected void explode() {
 		_exploded = true;
-		
-		
 		// TODO: x? lý khi Character ??ng t?i v? trí Bomb
-		
+		Character character = _board.getCharacterAtExcluding((int)_x,(int)_y,null);
+		if(character!=null){
+			character.kill();
+		}
+
 		// TODO: t?o các Flame
+		_flames = new Flame[4];
+		for(int i=0;i<_flames.length;i++){
+			_flames[i] = new Flame((int) _x,(int) _y, i , Game.getBombRadius() ,_board );
+		}
 	}
-	
+		
 	public FlameSegment flameAt(int x, int y) {
 		if(!_exploded) return null;
 		
@@ -96,14 +104,17 @@ public class Bomb extends AnimatedEntitiy {
 	@Override
 	public boolean collide(Entity e) {
         // TODO: x? lý khi Bomber ?i ra sau khi v?a ??t bom (_allowedToPassThru)
-        if(e instanceof Bomber && _allowedToPassThru)
-            return false;
-        else if(_allowedToPassThru)
-            _allowedToPassThru = false;
+        if(e instanceof Bomber){
+            double diffX = e.getX() - getX()*16;
+			double diffY = e.getY() - getY()*16;
+
+			if(!(diffX >= -10 && diffX < 16 && diffY >= 1 && diffY <= 28))  // differences to see if the player has moved out of the bomb
+				_allowedToPassThru = false;
+            return !_allowedToPassThru;
+        }
         
         if(e instanceof Flame) {
 			this.explode();
-            return false;
 		}
         return true;
 	}

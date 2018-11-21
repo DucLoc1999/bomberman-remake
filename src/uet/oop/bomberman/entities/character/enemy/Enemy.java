@@ -1,6 +1,5 @@
 package uet.oop.bomberman.entities.character.enemy;
 
-import com.sun.xml.internal.bind.v2.runtime.Coordinator;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
@@ -11,7 +10,6 @@ import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.entities.character.enemy.ai.AI;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
-import uet.oop.bomberman.level.Coordinates;
 
 import java.awt.*;
 

@@ -15,8 +15,6 @@ public class Balloom extends Enemy {
 		
 		_ai = new AILow();
 		_direction = _ai.calculateDirection();
-        System.out.println("uet.oop.bomberman.entities.character.enemy.Balloon");
-        System.out.println(+this._animate+" "+this.rest+" "+this._speed+" "+this._steps);
 	}
 
 	@Override

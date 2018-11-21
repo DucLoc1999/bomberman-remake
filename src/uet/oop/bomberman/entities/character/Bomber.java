@@ -15,8 +15,7 @@ import java.util.List;
 import uet.oop.bomberman.entities.Message;
 import uet.oop.bomberman.entities.bomb.Flame;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
-import uet.oop.bomberman.entities.tile.Grass;
-import uet.oop.bomberman.entities.tile.Wall;
+import uet.oop.bomberman.level.Coordinates;
 
 public class Bomber extends Character {
 
@@ -78,15 +77,26 @@ public class Bomber extends Character {
      * Kiểm tra xem có đặt được bom hay không? nếu có thì đặt bom tại vị trí hiện tại của Bomber
      */
     private void detectPlaceBomb() {
-        // TODO: kiểm tra xem phím đi�?u khiển đặt bom có được gõ và giá trị _timeBetweenPutBombs, Game.getBombRate() có th�?a mãn hay không
-        // TODO:  Game.getBombRate() sẽ trả v�? số lượng bom có thể đặt liên tiếp tại th�?i điểm hiện tại
-        // TODO: _timeBetweenPutBombs dùng để ngăn chặn Bomber đặt 2 Bomb cùng tại 1 vị trí trong 1 khoảng th�?i gian quá ngắn
-        // TODO: nếu 3 đi�?u kiện trên th�?a mãn thì thực hiện đặt bom bằng placeBomb()
-        // TODO: sau khi đặt, nhớ giảm số lượng Bomb Rate và reset _timeBetweenPutBombs v�? 0
+        // TODO: ki?m tra xem ph�m ?i?u khi?n ??t bom c� ???c g� v� gi� tr? _timeBetweenPutBombs, Game.getBombRate() c� th?a m�n hay kh�ng
+        if(_input.space && Game.getBombRate()>0 && _timeBetweenPutBombs < 0){
+            int x = Coordinates.pixelToTile(_x + _sprite.getSize()/2);
+            int y = Coordinates.pixelToTile(_y - _sprite.getSize()/2 );
+
+            placeBomb(x,y);
+            Game.addBombRate(-1);
+            _timeBetweenPutBombs = 30;
+        }
+        // TODO:  Game.getBombRate() s? tr? v? s? l??ng bom c� th? ??t li�n ti?p t?i th?i ?i?m hi?n t?i
+        // TODO: _timeBetweenPutBombs d�ng ?? ng?n ch?n Bomber ??t 2 Bomb c�ng t?i 1 v? tr� trong 1 kho?ng th?i gian qu� ng?n
+        // TODO: n?u 3 ?i?u ki?n tr�n th?a m�n th� th?c hi?n ??t bom b?ng placeBomb()
+        // TODO: sau khi ??t, nh? gi?m s? l??ng Bomb Rate v� reset _timeBetweenPutBombs v? 0
     }
 
     protected void placeBomb(int x, int y) {
-        // TODO: thực hiện tạo đối tượng bom, đặt vào vị trí (x, y)
+        // TODO: th?c hi?n t?o ??i t??ng bom, ??t v�o v? tr� (x, y)
+        Bomb bomb = new Bomb(x,y,_board);
+        _board.addBomb(bomb);
+
     }
 
     private void clearBombs() {
