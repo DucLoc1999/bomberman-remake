@@ -1,15 +1,11 @@
 uet\oop\bomberman\graphics\SpriteSheet.class
 uet\oop\bomberman\entities\AnimatedEntitiy.class
-uet\oop\bomberman\entities\character\enemy\Oneal.class
 uet\oop\bomberman\entities\tile\destroyable\DestroyableTile.class
 uet\oop\bomberman\entities\tile\item\Item.class
 uet\oop\bomberman\entities\character\enemy\ai\AILow.class
 uet\oop\bomberman\Board.class
-uet\oop\bomberman\level\FileLevelLoader.class
 uet\oop\bomberman\input\Keyboard.class
 uet\oop\bomberman\entities\tile\destroyable\Brick.class
-uet\oop\bomberman\entities\tile\Portal.class
-uet\oop\bomberman\entities\character\enemy\ai\AIMedium.class
 uet\oop\bomberman\entities\tile\Wall.class
 uet\oop\bomberman\entities\LayeredEntity.class
 uet\oop\bomberman\Game.class
@@ -24,7 +20,6 @@ uet\oop\bomberman\entities\bomb\Flame.class
 uet\oop\bomberman\exceptions\GameException.class
 uet\oop\bomberman\gui\InfoPanel.class
 uet\oop\bomberman\entities\character\enemy\ai\AI.class
-uet\oop\bomberman\entities\tile\item\SpeedItem.class
 uet\oop\bomberman\entities\tile\item\BombItem.class
 uet\oop\bomberman\entities\bomb\Bomb.class
 uet\oop\bomberman\entities\tile\item\FlameItem.class
@@ -34,7 +29,6 @@ uet\oop\bomberman\entities\character\Character.class
 uet\oop\bomberman\graphics\Sprite.class
 uet\oop\bomberman\entities\Entity.class
 uet\oop\bomberman\level\Coordinates.class
-uet\oop\bomberman\entities\character\enemy\Balloon.class
 uet\oop\bomberman\gui\Frame.class
 uet\oop\bomberman\entities\character\enemy\Enemy.class
 uet\oop\bomberman\exceptions\LoadLevelException.class

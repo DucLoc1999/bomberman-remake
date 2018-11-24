@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities.tile.item;
 
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.bomb.Flame;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -20,7 +21,15 @@ public class BombItem extends Item {
 			remove();
 			Game.addBombRate(1);
 		}
-		return true;
+        
+        if(e instanceof Flame){
+			if(this.isRemoved())
+                return false;
+			remove();
+        }
+
+        
+		return false;
 	}
 	
 

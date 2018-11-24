@@ -1,7 +1,6 @@
 package uet.oop.bomberman.level;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -40,7 +39,7 @@ public class FileLevelLoader extends LevelLoader {
 	@Override
 	public void loadLevel(int level) {
         System.out.println("uet.oop.bomberman.level.FileLevelLoader");
-        String path = "/levels/Level"+(level+4)+".txt";
+        String path = "/levels/Level"+level+".txt";
         try{
             URL absPath = FileLevelLoader.class.getResource(path);
             InputStream is = absPath.openStream();

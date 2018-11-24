@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Quản lý thao tác điều khiển, load level, render các màn hình của game
+ * Qu?n l� thao t�c ?i?u khi?n, load level, render c�c m�n h�nh c?a game
  */
 public class Board implements IRender {
 	protected LevelLoader _levelLoader;
@@ -49,9 +49,9 @@ public class Board implements IRender {
 	public void update() {
 		if( _game.isPaused() ) return;
 		
-		updateEntities();
-		updateCharacters();
-		updateBombs();
+		updateCharacters();///////////
+		updateBombs();//System.out.println("uet.oop.bomberman.Broad");
+		updateEntities();/////////////
 		updateMessages();
 		detectEndGame();
 		

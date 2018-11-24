@@ -148,7 +148,7 @@ public class Bomber extends Character {
 
     @Override
     public boolean canMove(double x, double y) {
-        //l?y size bomber là x = 11 [0->10], y = 11 [5->15]
+        //l?y size bomber là x = 11 [0->10], y = 10 [5->15]
         double pos_x = _x + x;
         double pos_y = _y - Game.TILES_SIZE + y;
         

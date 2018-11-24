@@ -104,17 +104,18 @@ public class Bomb extends AnimatedEntitiy {
 	@Override
 	public boolean collide(Entity e) {
         // TODO: x? lý khi Bomber ?i ra sau khi v?a ??t bom (_allowedToPassThru)
-        if(e instanceof Bomber){
-            double diffX = e.getX() - getX()*16;
-			double diffY = e.getY() - getY()*16;
-
-			if(!(diffX >= -10 && diffX < 16 && diffY >= 1 && diffY <= 28))  // differences to see if the player has moved out of the bomb
-				_allowedToPassThru = false;
-            return !_allowedToPassThru;
+        if(_allowedToPassThru && e instanceof Bomber){
+                double diffX = e.getX() - getX()*16;
+    			double diffY = e.getY() - 16 - getY()*16;
+                if(!(diffX > -10 && diffX < 16 && diffY >-16 && diffY < 10))  // differences to see if the player has moved out of the bomb
+                    _allowedToPassThru = false;
+                return !_allowedToPassThru;
         }
         
-        if(e instanceof Flame) {
+        if(e instanceof Flame && !_exploded) {
+            
 			this.explode();
+			return false;
 		}
         return true;
 	}
