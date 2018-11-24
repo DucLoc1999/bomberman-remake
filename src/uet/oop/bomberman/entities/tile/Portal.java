@@ -13,15 +13,13 @@ public class Portal extends Tile {
 	}
 	@Override
 	public boolean collide(Entity e) {
-		// TODO: xử lý khi Bomber đi vào
 
 		if(e instanceof Bomber ){
 			if(Game.getBoard().detectNoEnemies()) {
 				Game.getBoard().nextLevel();
-				return true;
 			}
 		}
-		return false;
+		return true;
 	}
 
 }
