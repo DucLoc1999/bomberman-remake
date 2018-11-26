@@ -221,7 +221,22 @@ public class AIHigh extends AI{
         int y2 = _bomber.getYTile();
         //System.out.println(x1+" "+y1+" "+x2+" "+y2);
         
-        //System.out.println(x1+" : "+ y1);        
+        //System.out.println(x1+" : "+ y1);
+        {// neu chi co 1 huong
+            int numOfDir = 0;
+            int oneDir = 0;
+            for(int i = 0; i < 4; i++){
+                int[]pos = nextMove(x1, y1, i);
+                if(matrix[pos[1]][pos[0]] == 0){
+                    numOfDir++;
+                    oneDir = i;
+                }
+                if(numOfDir >= 2)
+                    break;
+            }
+            if(numOfDir == 1)
+                return oneDir;
+        }
         int[] pos = spread(x2, y2, x1, y1);//tìm t? bomber v? enemy
         if(pos[0] != -1){
             //System.out.print("smart: ");

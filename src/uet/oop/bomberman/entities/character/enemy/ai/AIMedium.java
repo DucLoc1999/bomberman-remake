@@ -18,9 +18,8 @@ public class AIMedium extends AI {
 
 	@Override
 	public int calculateDirection() {
-        double x = (_bomber.getX() - _e.getX())/Game.TILES_SIZE;
-        double y = (_bomber.getY() - _e.getY())/Game.TILES_SIZE;
-        
+        double x = (_bomber.getXTile()- _e.getXTile());
+        double y = (_bomber.getYTile()- _e.getYTile());
         if(abs(x) + abs(y) <= _range){
             int[] arr = new int[2];
             if(x > 0)
