@@ -5,10 +5,13 @@ import static java.lang.Math.abs;
 import java.util.Vector;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.LayeredEntity;
+import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
-import uet.oop.bomberman.entities.tile.Grass;
-import uet.oop.bomberman.entities.tile.item.Item;
+import uet.oop.bomberman.entities.tile.Portal;
+import uet.oop.bomberman.entities.tile.Wall;
+import uet.oop.bomberman.entities.tile.destroyable.Brick;
 
 public class AIHigh extends AI{
 	Bomber _bomber;
@@ -16,7 +19,7 @@ public class AIHigh extends AI{
 	double _range;
     Vector<int[]> spreadList;
     
-    public static Board _board;
+    protected Board _board;
     public static int w = 0;
     public static int h = 0;
     int[][] matrix;
@@ -33,10 +36,15 @@ public class AIHigh extends AI{
             for (int j = 0; j < w; j++) {
                 int mark = 0;
                 Entity e = _board.getEntity(j, i, _e);//x,y
-                if(e instanceof Grass || e instanceof Item || e instanceof Bomber || e instanceof Enemy)
-                    mark = 0;
-                else
+                
+                if(e instanceof Wall || e instanceof Portal || e instanceof Bomb)
                     mark = -1;
+                else if(e instanceof LayeredEntity){
+                    e = ((LayeredEntity) e).getTopEntity();
+                    if(e instanceof Brick)
+                        mark = -1;
+                }
+                
                 matrix[i][j] = mark;
             }
         }
@@ -146,7 +154,7 @@ public class AIHigh extends AI{
         if(abs(xy[0]-x2)+abs(xy[1]-y2) > 1)
             spreadList.add(xy);
         
-        while(abs(xy[0]-x2)+abs(xy[1]-y2) > 1 && spreadList.size() <= 15){//chua tim dc va size < 15
+        while(abs(xy[0]-x2)+abs(xy[1]-y2) > 1 && spreadList.size() <= _range){//chua tim dc va size < 15
             if(spreadList.isEmpty()){//kt spredList
                 int[] fail = {-1};
                 return fail;//thoat va khong co loi di
@@ -179,14 +187,6 @@ public class AIHigh extends AI{
             spreadList.remove(0);
         }
         
-        /*
-        for (int i = 0; i < h; i++) {
-            for (int j = 0; j < w; j++) {
-                System.out.print(matrix[i][j] == -1 ? -1:(" "+matrix[i][j]));
-            }
-            System.out.println("");
-        }
-        */
         
         if(abs(xy[0]-x2)+abs(xy[1]-y2) <= 1)
             return xy;
@@ -199,29 +199,19 @@ public class AIHigh extends AI{
 	public AIHigh(Bomber bomber, Enemy e, double range, Board board) {
 		_bomber = bomber;
 		_e = e;
-        _range = range;
+        _range = range;//special it is the maximun of different way it have to try.
         _board = board;
 	}
 
 	@Override
     public int calculateDirection(){
         updateMatrix();
-        /*
-        for (int i = 0; i < h; i++) {
-            for (int j = 0; j < w; j++) {
-                System.out.print(matrix[i][j] == -1 ? -1:(" "+matrix[i][j]));
-            }
-            System.out.println("");
-        }
-        */
-        
+                
         int x1 = _e.getXTile();
         int y1 = _e.getYTile();
         int x2 = _bomber.getXTile();
         int y2 = _bomber.getYTile();
-        //System.out.println(x1+" "+y1+" "+x2+" "+y2);
-        
-        //System.out.println(x1+" : "+ y1);
+
         {// neu chi co 1 huong
             int numOfDir = 0;
             int oneDir = 0;
@@ -239,10 +229,7 @@ public class AIHigh extends AI{
         }
         int[] pos = spread(x2, y2, x1, y1);//tìm t? bomber v? enemy
         if(pos[0] != -1){
-            //System.out.print("smart: ");
-            //System.out.println(pos[0]+" : "+ pos[1]);
             int[] dir = direct(x1, y1, pos[0], pos[1]);
-            //System.out.println(dir[0]+" "+dir[1]+" "+dir[2]+" "+dir[3]+" "+dir[4]);
             return  direct(x1, y1, pos[0], pos[1])[0];
         }else
             return random.nextInt(4);

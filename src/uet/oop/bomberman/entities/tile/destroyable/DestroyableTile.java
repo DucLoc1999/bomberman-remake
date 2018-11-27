@@ -66,5 +66,4 @@ public class DestroyableTile extends Tile {
 			
 		return x2;
 	}
-	
 }

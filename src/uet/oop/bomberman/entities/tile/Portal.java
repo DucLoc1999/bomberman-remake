@@ -22,11 +22,11 @@ public class Portal extends Tile {
                 Board._sound.stop();
                 Board._sound.getAudio(GameSound.WIN).play();
                 try {
-                    Thread.sleep(8000);
+                    Thread.sleep(7500);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
                 }
-				Game.getBoard().nextLevel();
+                Game.getBoard().nextLevel();
 			}
 		}
 		return true;

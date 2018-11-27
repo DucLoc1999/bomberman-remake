@@ -58,7 +58,6 @@ public class GameSound {
 		AudioClip auClip = null;
 		try{
 			auClip = Applet.newAudioClip(GameSound.class.getResource("/sound/" + name));
-			System.out.println("ok  " + name);
 		}catch(Exception e){
             System.out.println("Eror in " + name);
 			e.printStackTrace();
