@@ -12,21 +12,24 @@ import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.input.Keyboard;
 import uet.oop.bomberman.level.FileLevelLoader;
 import uet.oop.bomberman.level.LevelLoader;
+import uet.oop.bomberman.sound.GameSound;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * Qu?n lý thao tác ?i?u khi?n, load level, render các màn hình c?a game
+ * Qu?n lï¿½ thao tï¿½c ?i?u khi?n, load level, render cï¿½c mï¿½n hï¿½nh c?a game
  */
 public class Board implements IRender {
 	protected LevelLoader _levelLoader;
 	protected Game _game;
 	protected Keyboard _input;
 	protected Screen _screen;
-	
+
 	public Entity[] _entities;
 	public List<Character> _characters = new ArrayList<>();
 	protected List<Bomb> _bombs = new ArrayList<>();
@@ -36,12 +39,15 @@ public class Board implements IRender {
 	
 	private int _time = Game.TIME;
 	private int _points = Game.POINTS;
-	
+
+	public static GameSound _sound;
+
 	public Board(Game game, Keyboard input, Screen screen) {
+
+		_sound = new GameSound();
 		_game = game;
 		_input = input;
 		_screen = screen;
-		
 		loadLevel(1); //start in level 1
 	}
 	
@@ -64,6 +70,7 @@ public class Board implements IRender {
 	@Override
 	public void render(Screen screen) {
 		if( _game.isPaused() ) return;
+
 		
 		//only render the visible part of screen
 		int x0 = Screen.xOffset >> 4; //tile precision, -> left X
@@ -97,12 +104,15 @@ public class Board implements IRender {
 		
 		try {
 			_levelLoader = new FileLevelLoader(this, level);
+
 			_entities = new Entity[_levelLoader.getHeight() * _levelLoader.getWidth()];
 			
 			_levelLoader.createEntities();
 		} catch (LoadLevelException e) {
 			endGame();
-		}
+		} 
+        
+        _sound.getAudio(GameSound.PLAYGAME).loop();
 	}
 	
 	protected void detectEndGame() {
@@ -111,9 +121,11 @@ public class Board implements IRender {
 	}
 	
 	public void endGame() {
+		_sound.getAudio(GameSound.PLAYGAME).stop();
 		_screenToShow = 1;
 		_game.resetScreenDelay();
 		_game.pause();
+		_sound.getAudio(GameSound.LOSE).play();
 	}
 	
 	public boolean detectNoEnemies() {
@@ -136,6 +148,7 @@ public class Board implements IRender {
 				break;
 			case 3:
 				_screen.drawPaused(g);
+
 				break;
 		}
 	}

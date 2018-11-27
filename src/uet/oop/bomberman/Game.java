@@ -11,7 +11,7 @@ import java.awt.image.DataBufferInt;
 
 /**
  * Tạo vòng lặp cho game, lưu trữ một vài tham số cấu hình toàn cục,
- * G�?i phương thức render(), update() cho tất cả các entity
+ * G�?i phương thức render(), update() cho tất cả các entity
  */
 public class Game extends Canvas {
 
@@ -49,7 +49,7 @@ public class Game extends Canvas {
 	
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
-	
+
 	public Game(Frame frame) {
 		_frame = frame;
 		_frame.setTitle(TITLE);

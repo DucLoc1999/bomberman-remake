@@ -1,9 +1,11 @@
 package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.Board;
+import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.graphics.Screen;
+import uet.oop.bomberman.sound.GameSound;
 
 public class Flame extends Entity {
 
@@ -15,10 +17,10 @@ public class Flame extends Entity {
 
 	/**
 	 *
-	 * @param x hoành ?? b?t ??u c?a Flame
+	 * @param x hoï¿½nh ?? b?t ??u c?a Flame
 	 * @param y tung ?? b?t ??u c?a Flame
-	 * @param direction là h??ng c?a Flame
-	 * @param radius ?? dài c?c ??i c?a Flame
+	 * @param direction lï¿½ h??ng c?a Flame
+	 * @param radius ?? dï¿½i c?c ??i c?a Flame
 	 */
 	public Flame(int x, int y, int direction, int radius, Board board) {
 		xOrigin = x;
@@ -32,20 +34,20 @@ public class Flame extends Entity {
 	}
 
 	/**
-	 * T?o các FlameSegment, m?i segment ?ng m?t ??n v? ?? dài
+	 * T?o cï¿½c FlameSegment, m?i segment ?ng m?t ??n v? ?? dï¿½i
 	 */
 	private void createFlameSegments() {
 		/**
-		 * tính toán ?? dài Flame, t??ng ?ng v?i s? l??ng segment
+		 * tï¿½nh toï¿½n ?? dï¿½i Flame, t??ng ?ng v?i s? l??ng segment
 		 */
 		_flameSegments = new FlameSegment[calculatePermitedDistance()];
 
 		/**
-		 * bi?n last dùng ?? ?ánh d?u cho segment cu?i cùng
+		 * bi?n last dï¿½ng ?? ?ï¿½nh d?u cho segment cu?i cï¿½ng
 		 */
 		boolean last;
 
-		// TODO: t?o các segment d??i ?ây
+		// TODO: t?o cï¿½c segment d??i ?ï¿½y
 		for(int i = 0; i< _flameSegments.length; i++){
 			switch (_direction) {
 				case 0: yOrigin--; break;
@@ -65,11 +67,11 @@ public class Flame extends Entity {
 	}
 
 	/**
-	 * Tính toán ?? dài c?a Flame, n?u g?p v?t c?n là Brick/Wall, ?? dài s? b? c?t ng?n
+	 * Tï¿½nh toï¿½n ?? dï¿½i c?a Flame, n?u g?p v?t c?n lï¿½ Brick/Wall, ?? dï¿½i s? b? c?t ng?n
 	 * @return
 	 */
 	private int calculatePermitedDistance() {
-		// TODO: th?c hi?n tính toán ?? dài c?a Flame
+		// TODO: th?c hi?n tï¿½nh toï¿½n ?? dï¿½i c?a Flame
 		int radius = 0;
 		while (radius < _radius){
 			if(_direction == 0) _y--;
@@ -108,7 +110,7 @@ public class Flame extends Entity {
 
 	@Override
 	public boolean collide(Entity e) {
-		// TODO: x? lý va ch?m v?i Bomber, Enemy. Chú ý ??i t??ng này có v? trí chính là v? trí c?a Bomb ?ã n?
+		// TODO: x? lï¿½ va ch?m v?i Bomber, Enemy. Chï¿½ ï¿½ ??i t??ng nï¿½y cï¿½ v? trï¿½ chï¿½nh lï¿½ v? trï¿½ c?a Bomb ?ï¿½ n?
         if(e instanceof Character){
             return false;
         }

@@ -8,6 +8,7 @@ import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.sound.GameSound;
 
 public class Bomb extends AnimatedEntitiy {
 
@@ -18,8 +19,10 @@ public class Bomb extends AnimatedEntitiy {
 	protected Flame[] _flames;
 	protected boolean _exploded = false;
 	protected boolean _allowedToPassThru = true;
-	
+
 	public Bomb(int x, int y, Board board) {
+
+		board._sound.getAudio(GameSound.BOMB).play();
 		_x = x;
 		_y = y;
 		_board = board;
@@ -76,13 +79,14 @@ public class Bomb extends AnimatedEntitiy {
      */
 		protected void explode() {
 		_exploded = true;
-		// TODO: x? lý khi Character ??ng t?i v? trí Bomb
+		// TODO: x? lï¿½ khi Character ??ng t?i v? trï¿½ Bomb
 		Character character = _board.getCharacterAtExcluding((int)_x,(int)_y,null);
 		if(character!=null){
 			character.kill();
 		}
 
-		// TODO: t?o các Flame
+		// TODO: t?o cï¿½c Flame
+		Board._sound.getAudio(GameSound.BONG_BANG).play();
 		_flames = new Flame[4];
 		for(int i=0;i<_flames.length;i++){
 			_flames[i] = new Flame((int) _x,(int) _y, i , Game.getBombRadius() ,_board );
@@ -103,7 +107,7 @@ public class Bomb extends AnimatedEntitiy {
 
 	@Override
 	public boolean collide(Entity e) {
-        // TODO: x? lý khi Bomber ?i ra sau khi v?a ??t bom (_allowedToPassThru)
+        // TODO: x? lï¿½ khi Bomber ?i ra sau khi v?a ??t bom (_allowedToPassThru)
         if(_allowedToPassThru && e instanceof Bomber){
                 double diffX = e.getX() - getX()*16;
     			double diffY = e.getY() - 16 - getY()*16;

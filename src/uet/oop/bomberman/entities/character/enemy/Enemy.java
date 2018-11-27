@@ -10,6 +10,7 @@ import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.entities.character.enemy.ai.AI;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.sound.GameSound;
 
 import java.awt.*;
 
@@ -110,19 +111,19 @@ public abstract class Enemy extends Character {
 		double pos_x = _x + x;
         double pos_y = _y - Game.TILES_SIZE + y;
         
-			Entity a = _board.getEntity((pos_x)/Game.TILES_SIZE, (pos_y)/Game.TILES_SIZE, this);//góc trên trái
+			Entity a = _board.getEntity((pos_x)/Game.TILES_SIZE, (pos_y)/Game.TILES_SIZE, this);//gï¿½c trï¿½n trï¿½i
 			if(a.collide(this))
 				return false;
             
-            a = _board.getEntity((pos_x+15)/Game.TILES_SIZE, (pos_y)/Game.TILES_SIZE, this);//góc trên ph?i
+            a = _board.getEntity((pos_x+15)/Game.TILES_SIZE, (pos_y)/Game.TILES_SIZE, this);//gï¿½c trï¿½n ph?i
 			if(a.collide(this))
 				return false;
             
-            a = _board.getEntity((pos_x)/Game.TILES_SIZE, (pos_y+15)/Game.TILES_SIZE, this);//góc d??i trái
+            a = _board.getEntity((pos_x)/Game.TILES_SIZE, (pos_y+15)/Game.TILES_SIZE, this);//gï¿½c d??i trï¿½i
 			if(a.collide(this))
 				return false;
             
-            a = _board.getEntity((pos_x+15)/Game.TILES_SIZE, (pos_y+15)/Game.TILES_SIZE, this);//góc d??i ph?i
+            a = _board.getEntity((pos_x+15)/Game.TILES_SIZE, (pos_y+15)/Game.TILES_SIZE, this);//gï¿½c d??i ph?i
 			if(a.collide(this))
 				return false;
             
@@ -143,6 +144,7 @@ public abstract class Enemy extends Character {
 	
 	@Override
 	public void kill() {
+		Board._sound.getAudio(GameSound.MONSTER_DIE).play();
 		if(!_alive) return;
 		_alive = false;
 		
